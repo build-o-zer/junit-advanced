@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 
-@Builder
+@Builder(access = lombok.AccessLevel.PACKAGE)
 public class Hero {
 
     @Getter

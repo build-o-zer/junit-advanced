@@ -18,4 +18,9 @@ public enum Quest {
     @Getter
     private final int reward;
 
+    // TODO: to be tested
+    public String getDescription() {
+        return String.format("The Quest '%s' rewards %d experience points.", name, reward);
+    }
+
 }
