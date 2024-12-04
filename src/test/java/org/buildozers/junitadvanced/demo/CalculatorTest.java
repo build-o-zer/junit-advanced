@@ -1,6 +1,8 @@
 package org.buildozers.junitadvanced.demo;
 
 import static org.assertj.core.api.Assertions.*;
+
+import org.buildozers.junitadvanced.preconditions.PreconditionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -85,8 +87,8 @@ class CalculatorTest {
         void testDivideByZero() {
             // when / then
             assertThatThrownBy(() -> calculator.divide(0))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Cannot divide by zero");
+                    .isInstanceOf(PreconditionException.class)
+                    .hasMessageContaining("Cannot divide by zero");
         }
 
     }
@@ -153,8 +155,8 @@ class CalculatorTest {
         void testDivideByZero() {
             // when / then
             assertThatThrownBy(() -> calculator.divide(0))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Cannot divide by zero");
+                    .isInstanceOf(PreconditionException.class)
+                    .hasMessageContaining("Cannot divide by zero");
         }
 
     }

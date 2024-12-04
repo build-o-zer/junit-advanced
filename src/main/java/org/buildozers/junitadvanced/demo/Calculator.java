@@ -1,6 +1,7 @@
 package org.buildozers.junitadvanced.demo;
 
 import lombok.Getter;
+import org.buildozers.junitadvanced.preconditions.Precondition;
 
 /**
  * A simple calculator class that can perform basic arithmetic operations.
@@ -48,9 +49,7 @@ public class Calculator {
      * @throws IllegalArgumentException if the given value is zero with a message "Cannot divide by zero"
      */
     public void divide(int value) {
-        if (value == 0) {
-            throw new IllegalArgumentException("Cannot divide by zero");
-        }
+        Precondition.checkPredicate(value, "value", v -> v != 0, "Cannot divide by zero");
         currentValue /= value;
     }
 
