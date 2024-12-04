@@ -1,7 +1,11 @@
 package org.buildozers.junitadvanced.kata.heroes;
 
 import lombok.experimental.UtilityClass;
-import static org.apache.commons.lang3.Validate.*;
+
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
+import org.buildozers.junitadvanced.preconditions.Precondition;
 
 @UtilityClass
 public class HeroFactory {
@@ -9,10 +13,10 @@ public class HeroFactory {
     // TODO: to be tested
     public static Hero createHero(Guild guild, String nickName, int experience) {
         // preconditions
-        notNull(guild, "Guild must not be null");
-        notBlank(nickName, "Nick name must not be blank");
-        isTrue(experience >= 0, "Experience must be positive");
-
+        Precondition.checkNotNull(guild, "guild");
+        Precondition.checkPredicate(nickName, "nickName", StringUtils::isNotBlank, "cannot be blank");
+        Precondition.checkPredicate(experience, "experience", xp -> xp >= 0, "must be greater than 0");
+        
         // create hero
         return Hero.builder()
                 .guild(guild)

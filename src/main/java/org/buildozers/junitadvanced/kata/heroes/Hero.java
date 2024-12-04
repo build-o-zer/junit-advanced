@@ -24,7 +24,6 @@ public class Hero {
        this.experience += reward;
     }
 
-    // TODO: to be tested
     public Guild.Power getPower() {
         return guild.getPower();
     }
