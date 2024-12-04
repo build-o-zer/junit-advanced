@@ -22,7 +22,7 @@ class CalculatorTest {
     }
 
     @Nested
-    @DisplayName("and a brand one is created")
+    @DisplayName("and a brand new one is created")
     class PoweredOnCalculatorTest {
 
         @BeforeEach
@@ -183,7 +183,7 @@ class CalculatorTest {
     }
 
     @Nested
-    @DisplayName("and a CSV source as annotations is provided with a current value of 5")
+    @DisplayName("and a CSV source files as annotations are provided with a current value of 5")
     class CSVSourceFileCalculatorTest {
 
         @BeforeEach
@@ -192,12 +192,23 @@ class CalculatorTest {
             calculator.add(5);
         }
 
-        @DisplayName("when multiply() is called with a value, then the current value should be increased by that value")
+        @DisplayName("when multiply() is called with a value, then the current value should be multiplied by that value")
         @ParameterizedTest
-        @CsvFileSource(resources = "multiplications.csv", numLinesToSkip = 4)
+        @CsvFileSource(resources = "/calculator-test/multiplications.csv", numLinesToSkip = 4)
         void testMultiplication(int value, long expected) {
             // when
             calculator.multiply(value);
+            // then
+            assertThat(calculator).extracting(Calculator::getCurrentValue)
+                    .isEqualTo(expected);
+        }
+
+        @DisplayName("when add() is called with a value, then the current value should be added by that value")
+        @ParameterizedTest
+        @CsvFileSource(resources = "/calculator-test/additions.csv", numLinesToSkip = 4)
+        void testAddition(int value, long expected) {
+            // when
+            calculator.add(value);
             // then
             assertThat(calculator).extracting(Calculator::getCurrentValue)
                     .isEqualTo(expected);
